@@ -13,6 +13,7 @@
     <RepositoryUrl>https://github.com/InvaderZim85/ZimLabs.Database.MsSql</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Helper, Database, MsSql, Connector</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

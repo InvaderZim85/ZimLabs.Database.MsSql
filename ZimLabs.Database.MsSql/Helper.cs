@@ -7,7 +7,7 @@ namespace ZimLabs.Database.MsSql
     /// <summary>
     /// Provides several helper functions
     /// </summary>
-    internal static class Helper
+    public static class Helper
     {
         /// <summary>
         /// Converts a secure string into a normal string
