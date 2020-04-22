@@ -39,5 +39,37 @@ namespace ZimLabs.Database.MsSql
         /// Gets or sets the name of the application
         /// </summary>
         public string ApplicationName { get; set; }
+
+        /// <summary>
+        /// Creates a new empty instance of the <see cref="DatabaseSettings"/>
+        /// </summary>
+        public DatabaseSettings(){ }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="DatabaseSettings"/> and sets the <see cref="IntegratedSecurity"/> to true
+        /// </summary>
+        /// <param name="dataSource">The data source</param>
+        /// <param name="initialCatalog">The initial catalog</param>
+        public DatabaseSettings(string dataSource, string initialCatalog)
+        {
+            DataSource = dataSource;
+            InitialCatalog = initialCatalog;
+            IntegratedSecurity = true;
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="DatabaseSettings"/>
+        /// </summary>
+        /// <param name="dataSource">The data source</param>
+        /// <param name="initialCatalog">The initial catalog</param>
+        /// <param name="userId">The user id</param>
+        /// <param name="password">The password</param>
+        public DatabaseSettings(string dataSource, string initialCatalog, string userId, SecureString password)
+        {
+            DataSource = dataSource;
+            InitialCatalog = initialCatalog;
+            UserId = userId;
+            Password = password;
+        }
     }
 }

@@ -66,6 +66,42 @@ namespace ZimLabs.Database.MsSql
         }
 
         /// <summary>
+        /// Creates a new instance of the <see cref="Connector"/> and sets the "IntegratedSecurity" to true
+        /// </summary>
+        /// <param name="dataSource">The data source</param>
+        /// <param name="initialCatalog">The initial catalog</param>
+        public Connector(string dataSource, string initialCatalog) : this(new DatabaseSettings(dataSource, initialCatalog))
+        {
+
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Connector"/>
+        /// </summary>
+        /// <param name="dataSource">The data source</param>
+        /// <param name="initialCatalog">The initial catalog</param>
+        /// <param name="userId">The user id</param>
+        /// <param name="password">The password</param>
+        public Connector(string dataSource, string initialCatalog, string userId, string password) : this(
+            new DatabaseSettings(dataSource, initialCatalog, userId, password.ToSecureString()))
+        {
+
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Connector"/>
+        /// </summary>
+        /// <param name="dataSource">The data source</param>
+        /// <param name="initialCatalog">The initial catalog</param>
+        /// <param name="userId">The user id</param>
+        /// <param name="password">The password</param>
+        public Connector(string dataSource, string initialCatalog, string userId, SecureString password) : this(
+            new DatabaseSettings(dataSource, initialCatalog, userId, password))
+        {
+
+        }
+
+        /// <summary>
         /// Creates the connection string
         /// </summary>
         private void CreateConnectionString()
