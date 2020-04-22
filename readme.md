@@ -1,6 +1,5 @@
-# ZimLabs.Database.MySql
+# ZimLabs.Database.MsSql
 
-Provides a class for the connection to a MsSQL Database.
+![Nuget](https://img.shields.io/nuget/v/ZimLabs.Database.MsSql) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/InvaderZim85/ZimLabs.Database.MsSql)
 
-## Dependencies
-- System.Data.SqlClient
+For more information click here: [ZimLabs.Database.MsSql](https://invaderzim85.github.io/ZimLabs.Database.MsSql/)

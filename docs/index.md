@@ -1,6 +1,6 @@
 # ZimLabs.Database.MsSql
 
-![Nuget](https://img.shields.io/nuget/v/ZimLabs.Database.MsSql)
+![Nuget](https://img.shields.io/nuget/v/ZimLabs.Database.MsSql) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/InvaderZim85/ZimLabs.Database.MsSql)
 
 This project provides a simple way to create a connection to a MSSQL database.
 
