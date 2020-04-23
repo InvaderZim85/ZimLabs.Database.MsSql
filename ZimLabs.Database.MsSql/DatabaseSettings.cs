@@ -50,11 +50,13 @@ namespace ZimLabs.Database.MsSql
         /// </summary>
         /// <param name="dataSource">The data source</param>
         /// <param name="initialCatalog">The initial catalog</param>
-        public DatabaseSettings(string dataSource, string initialCatalog)
+        /// <param name="applicationName">The name of the application</param>
+        public DatabaseSettings(string dataSource, string initialCatalog, string applicationName = "")
         {
             DataSource = dataSource;
             InitialCatalog = initialCatalog;
             IntegratedSecurity = true;
+            ApplicationName = applicationName;
         }
 
         /// <summary>
@@ -64,12 +66,14 @@ namespace ZimLabs.Database.MsSql
         /// <param name="initialCatalog">The initial catalog</param>
         /// <param name="userId">The user id</param>
         /// <param name="password">The password</param>
-        public DatabaseSettings(string dataSource, string initialCatalog, string userId, SecureString password)
+        /// <param name="applicationName">The name of the application</param>
+        public DatabaseSettings(string dataSource, string initialCatalog, string userId, SecureString password, string applicationName = "")
         {
             DataSource = dataSource;
             InitialCatalog = initialCatalog;
             UserId = userId;
             Password = password;
+            ApplicationName = applicationName;
         }
     }
 }

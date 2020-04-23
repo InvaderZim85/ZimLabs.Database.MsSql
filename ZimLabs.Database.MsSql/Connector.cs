@@ -70,7 +70,9 @@ namespace ZimLabs.Database.MsSql
         /// </summary>
         /// <param name="dataSource">The data source</param>
         /// <param name="initialCatalog">The initial catalog</param>
-        public Connector(string dataSource, string initialCatalog) : this(new DatabaseSettings(dataSource, initialCatalog))
+        /// <param name="applicationName">The name of the application (optional)</param>
+        public Connector(string dataSource, string initialCatalog, string applicationName = "") : this(
+            new DatabaseSettings(dataSource, initialCatalog, applicationName))
         {
 
         }
@@ -82,8 +84,9 @@ namespace ZimLabs.Database.MsSql
         /// <param name="initialCatalog">The initial catalog</param>
         /// <param name="userId">The user id</param>
         /// <param name="password">The password</param>
-        public Connector(string dataSource, string initialCatalog, string userId, string password) : this(
-            new DatabaseSettings(dataSource, initialCatalog, userId, password.ToSecureString()))
+        /// <param name="applicationName">The name of the application (optional)</param>
+        public Connector(string dataSource, string initialCatalog, string userId, string password, string applicationName = "") : this(
+            new DatabaseSettings(dataSource, initialCatalog, userId, password.ToSecureString(), applicationName))
         {
 
         }
@@ -95,8 +98,9 @@ namespace ZimLabs.Database.MsSql
         /// <param name="initialCatalog">The initial catalog</param>
         /// <param name="userId">The user id</param>
         /// <param name="password">The password</param>
-        public Connector(string dataSource, string initialCatalog, string userId, SecureString password) : this(
-            new DatabaseSettings(dataSource, initialCatalog, userId, password))
+        /// <param name="applicationName">The name of the application (optional)</param>
+        public Connector(string dataSource, string initialCatalog, string userId, SecureString password, string applicationName = "") : this(
+            new DatabaseSettings(dataSource, initialCatalog, userId, password, applicationName))
         {
 
         }
