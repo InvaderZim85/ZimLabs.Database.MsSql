@@ -46,6 +46,16 @@ namespace ZimLabs.Database.MsSql
         }
 
         /// <summary>
+        /// Gets the name / path of the current set data source aka server
+        /// </summary>
+        public string DataSource { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the current set database aka initial catalog
+        /// </summary>
+        public string InitialCatalog { get; private set; }
+
+        /// <summary>
         /// Creates a new instance of the <see cref="Connector"/>
         /// </summary>
         /// <param name="settings">The settings for the database connection</param>
@@ -60,6 +70,7 @@ namespace ZimLabs.Database.MsSql
         /// Creates a new instance of the <see cref="Connector"/>
         /// </summary>
         /// <param name="connectionString">The connection string</param>
+        [Obsolete("The constructor will be removed in the next version because it is too cumbersome (several steps necessary). Please use one of the other constructors.")]
         public Connector(SecureString connectionString)
         {
             _connectionString = connectionString;
@@ -71,7 +82,7 @@ namespace ZimLabs.Database.MsSql
         /// <param name="dataSource">The data source</param>
         /// <param name="initialCatalog">The initial catalog</param>
         /// <param name="applicationName">The name of the application (optional)</param>
-        public Connector(string dataSource, string initialCatalog, string applicationName = "") : this(
+        public Connector(string dataSource, string initialCatalog = "", string applicationName = "") : this(
             new DatabaseSettings(dataSource, initialCatalog, applicationName))
         {
 
@@ -110,6 +121,9 @@ namespace ZimLabs.Database.MsSql
         /// </summary>
         private void CreateConnectionString()
         {
+            DataSource = _settings.DataSource;
+            InitialCatalog = _settings.InitialCatalog;
+
             if (_settings.IntegratedSecurity)
             {
                 _connectionString = new SqlConnectionStringBuilder
@@ -160,6 +174,7 @@ namespace ZimLabs.Database.MsSql
             if (string.IsNullOrEmpty(database))
                 throw new ArgumentNullException(nameof(database));
 
+            InitialCatalog = database;
             _connection?.ChangeDatabase(database);
         }
 
