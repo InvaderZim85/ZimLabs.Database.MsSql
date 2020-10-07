@@ -179,6 +179,40 @@ namespace ZimLabs.Database.MsSql
         }
 
         /// <summary>
+        /// Returns the connection info according to the given types
+        /// </summary>
+        /// <param name="type">The types</param>
+        /// <returns>The connection string info</returns>
+        public string ConnectionStringInfo(Helper.ConnectionInfoType type)
+        {
+            var dataSource = $"Data source: {_settings.DataSource}";
+            var initialCatalog = $"Initial catalog: {_settings.InitialCatalog}";
+            var user = $"User: {(string.IsNullOrEmpty(_settings.UserId) ? "none" : _settings.UserId)}";
+            var integratedSecurity = $"Integrated security: {(_settings.IntegratedSecurity ? "Yes" : "No")}";
+
+            return (int) type switch
+            {
+                0 => "",
+                1 => dataSource,
+                2 => initialCatalog,
+                3 => $"{dataSource}; {initialCatalog}",
+                4 => user,
+                5 => $"{dataSource}; {user}",
+                6 => $"{initialCatalog}; {user}",
+                7 => $"{dataSource}; {initialCatalog}; {user}",
+                8 => integratedSecurity,
+                9 => $"{dataSource}; {integratedSecurity}",
+                10 => $"{initialCatalog}; {integratedSecurity}",
+                11 => $"{dataSource}; {initialCatalog}; {integratedSecurity}",
+                12 => $"{user}; {integratedSecurity}",
+                13 => $"{dataSource}; {user}; {integratedSecurity}",
+                14 => $"{initialCatalog}; {user}; {integratedSecurity}",
+                15 => $"{dataSource}; {initialCatalog}; {user}; {integratedSecurity}",
+                _ => ""
+            };
+        }
+
+        /// <summary>
         /// Disposes the class
         /// </summary>
         public void Dispose()
