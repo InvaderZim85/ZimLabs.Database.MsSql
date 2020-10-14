@@ -13,15 +13,19 @@
     <RepositoryUrl>https://github.com/InvaderZim85/ZimLabs.Database.MsSql</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Helper, Database, MsSql, Connector</PackageTags>
-    <Version>1.0.5</Version>
-    <PackageReleaseNotes>Added two properties (DataSource, InitialCatalog) to get information about the current connection</PackageReleaseNotes>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>Moved the connection info enum into own class</PackageReleaseNotes>
     <LangVersion>8.0</LangVersion>
-    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>..\ZimLabs.Database.MsSql\ZimLabs.Database.MsSql.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ZimLabs.Database.MsSql.xml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />

@@ -11,6 +11,8 @@ namespace ZimLabs.Database.MsSql
     /// </summary>
     public sealed class Connector : IDisposable
     {
+        
+
         /// <summary>
         /// Contains the value which indicates if the class was already disposed
         /// </summary>
@@ -183,7 +185,7 @@ namespace ZimLabs.Database.MsSql
         /// </summary>
         /// <param name="type">The types</param>
         /// <returns>The connection string info</returns>
-        public string ConnectionStringInfo(Helper.ConnectionInfoType type)
+        public string ConnectionStringInfo(ConnectionInfoType type)
         {
             var dataSource = $"Data source: {_settings.DataSource}";
             var initialCatalog = $"Initial catalog: {_settings.InitialCatalog}";
