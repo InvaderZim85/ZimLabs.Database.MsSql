@@ -13,10 +13,10 @@
     <RepositoryUrl>https://github.com/InvaderZim85/ZimLabs.Database.MsSql</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Helper, Database, MsSql, Connector</PackageTags>
-    <Version>1.1.0</Version>
-    <PackageReleaseNotes>Moved the connection info enum into own class</PackageReleaseNotes>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>Update of the underlying packages</PackageReleaseNotes>
     <LangVersion>8.0</LangVersion>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
   <ItemGroup>
