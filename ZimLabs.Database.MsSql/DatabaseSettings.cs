@@ -38,6 +38,11 @@ namespace ZimLabs.Database.MsSql
         public string ApplicationName { get; set; }
 
         /// <summary>
+        /// Gets or sets the connection timeout (in seconds)
+        /// </summary>
+        public uint ConnectionTimeout { get; set; }
+
+        /// <summary>
         /// Creates a new empty instance of the <see cref="DatabaseSettings"/>
         /// </summary>
         public DatabaseSettings(){ }
@@ -48,12 +53,14 @@ namespace ZimLabs.Database.MsSql
         /// <param name="dataSource">The data source</param>
         /// <param name="initialCatalog">The initial catalog</param>
         /// <param name="applicationName">The name of the application</param>
-        public DatabaseSettings(string dataSource, string initialCatalog, string applicationName = "")
+        /// <param name="connectionTimeout">The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error</param>
+        public DatabaseSettings(string dataSource, string initialCatalog, string applicationName = "", uint connectionTimeout = 15)
         {
             DataSource = dataSource;
             InitialCatalog = initialCatalog;
             IntegratedSecurity = true;
             ApplicationName = applicationName;
+            ConnectionTimeout = connectionTimeout;
         }
 
         /// <summary>
@@ -64,13 +71,34 @@ namespace ZimLabs.Database.MsSql
         /// <param name="userId">The user id</param>
         /// <param name="password">The password</param>
         /// <param name="applicationName">The name of the application</param>
-        public DatabaseSettings(string dataSource, string initialCatalog, string userId, SecureString password, string applicationName = "")
+        /// <param name="connectionTimeout">The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error</param>
+        public DatabaseSettings(string dataSource, string initialCatalog, string userId, string password, string applicationName = "", uint connectionTimeout = 15)
+        {
+            DataSource = dataSource;
+            InitialCatalog = initialCatalog;
+            UserId = userId;
+            Password = password.ToSecureString();
+            ApplicationName = applicationName;
+            ConnectionTimeout = connectionTimeout;
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="DatabaseSettings"/>
+        /// </summary>
+        /// <param name="dataSource">The data source</param>
+        /// <param name="initialCatalog">The initial catalog</param>
+        /// <param name="userId">The user id</param>
+        /// <param name="password">The password</param>
+        /// <param name="applicationName">The name of the application</param>
+        /// <param name="connectionTimeout">The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error</param>
+        public DatabaseSettings(string dataSource, string initialCatalog, string userId, SecureString password, string applicationName = "", uint connectionTimeout = 15)
         {
             DataSource = dataSource;
             InitialCatalog = initialCatalog;
             UserId = userId;
             Password = password;
             ApplicationName = applicationName;
+            ConnectionTimeout = connectionTimeout;
         }
     }
 }
