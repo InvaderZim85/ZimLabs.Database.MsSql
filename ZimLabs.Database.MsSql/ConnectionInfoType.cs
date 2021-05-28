@@ -31,6 +31,11 @@ namespace ZimLabs.Database.MsSql
         /// <summary>
         /// Shows the integrated security flag
         /// </summary>
-        IntegratedSecurity = 8
+        IntegratedSecurity = 8,
+
+        /// <summary>
+        /// Shows the connection timeout
+        /// </summary>
+        ConnectionTimeout = 16
     }
 }

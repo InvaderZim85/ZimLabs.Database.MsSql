@@ -5,14 +5,11 @@ using System.Security;
 
 namespace ZimLabs.Database.MsSql
 {
-
     /// <summary>
     /// Provides functions / properties for the interaction with a MySql database
     /// </summary>
     public sealed class Connector : IDisposable
     {
-        
-
         /// <summary>
         /// Contains the value which indicates if the class was already disposed
         /// </summary>
@@ -84,8 +81,9 @@ namespace ZimLabs.Database.MsSql
         /// <param name="dataSource">The data source</param>
         /// <param name="initialCatalog">The initial catalog</param>
         /// <param name="applicationName">The name of the application (optional)</param>
-        public Connector(string dataSource, string initialCatalog = "", string applicationName = "") : this(
-            new DatabaseSettings(dataSource, initialCatalog, applicationName))
+        /// <param name="connectionTimeout">The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error</param>
+        public Connector(string dataSource, string initialCatalog = "", string applicationName = "", uint connectionTimeout = 15) : this(
+            new DatabaseSettings(dataSource, initialCatalog, applicationName, connectionTimeout))
         {
 
         }
@@ -98,8 +96,9 @@ namespace ZimLabs.Database.MsSql
         /// <param name="userId">The user id</param>
         /// <param name="password">The password</param>
         /// <param name="applicationName">The name of the application (optional)</param>
-        public Connector(string dataSource, string initialCatalog, string userId, string password, string applicationName = "") : this(
-            new DatabaseSettings(dataSource, initialCatalog, userId, password.ToSecureString(), applicationName))
+        /// <param name="connectionTimeout">The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error</param>
+        public Connector(string dataSource, string initialCatalog, string userId, string password, string applicationName = "", uint connectionTimeout = 15) : this(
+            new DatabaseSettings(dataSource, initialCatalog, userId, password.ToSecureString(), applicationName, connectionTimeout))
         {
 
         }
@@ -112,8 +111,9 @@ namespace ZimLabs.Database.MsSql
         /// <param name="userId">The user id</param>
         /// <param name="password">The password</param>
         /// <param name="applicationName">The name of the application (optional)</param>
-        public Connector(string dataSource, string initialCatalog, string userId, SecureString password, string applicationName = "") : this(
-            new DatabaseSettings(dataSource, initialCatalog, userId, password, applicationName))
+        /// <param name="connectionTimeout">The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error</param>
+        public Connector(string dataSource, string initialCatalog, string userId, SecureString password, string applicationName = "", uint connectionTimeout = 15) : this(
+            new DatabaseSettings(dataSource, initialCatalog, userId, password, applicationName, connectionTimeout))
         {
 
         }
@@ -133,7 +133,8 @@ namespace ZimLabs.Database.MsSql
                     DataSource = _settings.DataSource,
                     InitialCatalog = _settings.InitialCatalog,
                     IntegratedSecurity = true,
-                    ApplicationName = _settings.ApplicationName
+                    ApplicationName = _settings.ApplicationName,
+                    ConnectTimeout = (int) _settings.ConnectionTimeout
                 }.ConnectionString.ToSecureString();
             }
             else
@@ -144,7 +145,8 @@ namespace ZimLabs.Database.MsSql
                     InitialCatalog = _settings.InitialCatalog,
                     UserID = _settings.UserId,
                     Password = _settings.Password.ToInsecureString(),
-                    ApplicationName = _settings.ApplicationName
+                    ApplicationName = _settings.ApplicationName,
+                    ConnectTimeout = (int) _settings.ConnectionTimeout
                 }.ConnectionString.ToSecureString();
             }
         }
@@ -187,31 +189,7 @@ namespace ZimLabs.Database.MsSql
         /// <returns>The connection string info</returns>
         public string ConnectionStringInfo(ConnectionInfoType type)
         {
-            var dataSource = $"Data source: {_settings.DataSource}";
-            var initialCatalog = $"Initial catalog: {_settings.InitialCatalog}";
-            var user = $"User: {(string.IsNullOrEmpty(_settings.UserId) ? "none" : _settings.UserId)}";
-            var integratedSecurity = $"Integrated security: {(_settings.IntegratedSecurity ? "Yes" : "No")}";
-
-            return (int) type switch
-            {
-                0 => "",
-                1 => dataSource,
-                2 => initialCatalog,
-                3 => $"{dataSource}; {initialCatalog}",
-                4 => user,
-                5 => $"{dataSource}; {user}",
-                6 => $"{initialCatalog}; {user}",
-                7 => $"{dataSource}; {initialCatalog}; {user}",
-                8 => integratedSecurity,
-                9 => $"{dataSource}; {integratedSecurity}",
-                10 => $"{initialCatalog}; {integratedSecurity}",
-                11 => $"{dataSource}; {initialCatalog}; {integratedSecurity}",
-                12 => $"{user}; {integratedSecurity}",
-                13 => $"{dataSource}; {user}; {integratedSecurity}",
-                14 => $"{initialCatalog}; {user}; {integratedSecurity}",
-                15 => $"{dataSource}; {initialCatalog}; {user}; {integratedSecurity}",
-                _ => ""
-            };
+            return Helper.GetConnectionInfo(type, _settings);
         }
 
         /// <summary>
