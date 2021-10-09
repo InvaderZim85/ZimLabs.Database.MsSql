@@ -9,7 +9,8 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
-    assignees: "InvaderZim85"
+    assignees: 
+      - "InvaderZim85"
     open-pull-requests-limit: 1,
     labels:
       - "nuget"
